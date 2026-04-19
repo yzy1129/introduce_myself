@@ -1,8 +1,0 @@
-node_modules
-dist
-.DS_Store
-*.local
-.npm-cache
-.tmp-edge
-.tmp-edge-about
-*.tsbuildinfo
