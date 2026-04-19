@@ -6,3 +6,4 @@ dist
 .tmp-edge
 .tmp-edge-about
 *.tsbuildinfo
+.__*.txt
