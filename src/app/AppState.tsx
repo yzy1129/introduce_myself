@@ -15,6 +15,9 @@ type PointerState = {
   x: number;
   y: number;
   active: boolean;
+  velocityX: number;
+  velocityY: number;
+  speed: number;
 };
 
 type AppStateValue = {
@@ -42,7 +45,7 @@ type AppStateValue = {
 const AppStateContext = createContext<AppStateValue | null>(null);
 
 const PRELOADER_SESSION_KEY = "digital-universe-preloader";
-const SOUND_PREFERENCE_KEY = "digital-universe-sound";
+const SOUND_PREFERENCE_KEY = "digital-universe-bgm-v2";
 
 function detectReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -85,6 +88,9 @@ export function AppStateProvider({ children }: PropsWithChildren) {
     x: window.innerWidth * 0.5,
     y: window.innerHeight * 0.5,
     active: false,
+    velocityX: 0,
+    velocityY: 0,
+    speed: 0,
   });
   const [reducedMotion, setReducedMotion] = useState(detectReducedMotion);
   const [isMobile, setIsMobile] = useState(detectMobile);
@@ -103,7 +109,7 @@ export function AppStateProvider({ children }: PropsWithChildren) {
   const [selectedSkillId, setSelectedSkillId] = useState<string | null>(null);
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [soundEnabled, setSoundEnabled] = useState(() => {
-    return localStorage.getItem(SOUND_PREFERENCE_KEY) === "on";
+    return localStorage.getItem(SOUND_PREFERENCE_KEY) !== "off";
   });
   const sectionElementsRef = useRef(new Map<string, HTMLElement>());
 

@@ -315,7 +315,7 @@ export const siteContent: SiteContent = {
       },
       {
         id: "project-digital-universe",
-        title: "数字宇宙个人作品集",
+        title: "心动告白",
         summary:
           "把我的项目、能力与研究兴趣组织成一套可探索、可叙事、可持续扩展的个人数字空间。",
         problem:
@@ -344,8 +344,8 @@ export const siteContent: SiteContent = {
         ],
         links: [
           {
-            label: "Gitee 仓库",
-            href: "https://gitee.com/yzyandhh/projects",
+            label: "在线访问",
+            href: "https://love-heart-rouge.vercel.app",
           },
         ],
       },
@@ -358,10 +358,10 @@ export const siteContent: SiteContent = {
     entries: [
       {
         id: "timeline-1",
-        year: "2021",
+        year: "2022",
         title: "建立基础",
         description:
-          "开始系统学习编程与软件实现，从单点功能完成逐步过渡到理解完整项目流程。",
+          "进入大学后开始系统学习编程与软件实现，从单点功能练习逐步过渡到理解完整项目流程与协作方式。",
         outcome:
           "打下了代码实现和工程思维的基础，也开始意识到“能跑起来”和“能讲清楚”是两件不同的事。",
       },
@@ -406,8 +406,8 @@ export const siteContent: SiteContent = {
           "可用命令：",
           "帮助   查看可用命令",
           "联系   查看联系方式",
-          "仓库   查看主仓库入口",
-          "项目   查看项目仓库列表",
+          "仓库   查看仓库入口",
+          "项目   查看项目链接列表",
         ],
       },
       {
@@ -421,9 +421,10 @@ export const siteContent: SiteContent = {
       },
       {
         command: "仓库",
-        description: "显示主仓库地址",
+        description: "显示仓库地址",
         response: [
-          "Gitee  : https://gitee.com/yzyandhh/projects",
+          "Gitee  : https://gitee.com/yzyandhh",
+          "GitHub : https://github.com/yzy1129",
           "方向   : 前端表达、交互系统、项目组织",
         ],
       },
@@ -435,6 +436,8 @@ export const siteContent: SiteContent = {
           "链接   : https://gitee.com/yzyandhh/bysj_yzy",
           "项目 2 : 智能语音助手",
           "链接   : https://gitee.com/yzyandhh/yuyin-robot",
+          "项目 3 : 心动告白",
+          "链接   : https://love-heart-rouge.vercel.app",
         ],
       },
     ],

@@ -1,320 +1,190 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppState } from "@/app/AppState";
-import { useAppRouter } from "@/app/AppRouter";
+const AUDIO_SOURCE = `${import.meta.env.BASE_URL}audio/BGM.mp3`;
+const TARGET_VOLUME = 0.42;
+const FADE_IN_MS = 520;
+const FADE_OUT_MS = 260;
 
-type AudioEngine = {
-  context: AudioContext;
-  masterGain: GainNode;
-  ambientGain: GainNode;
-  baseOscillator: OscillatorNode;
-  shimmerOscillator: OscillatorNode;
-  driftOscillator: OscillatorNode;
-  driftGain: GainNode;
+type FadeOptions = {
+  duration: number;
+  pauseOnEnd?: boolean;
 };
 
-const interactiveSelector =
-  "a, button, input, [role='button'], .reveal-text, .hud-nav-link";
-
-function createAudioEngine() {
-  const context = new AudioContext();
-  const masterGain = context.createGain();
-  const ambientGain = context.createGain();
-  const baseOscillator = context.createOscillator();
-  const shimmerOscillator = context.createOscillator();
-  const driftOscillator = context.createOscillator();
-  const driftGain = context.createGain();
-
-  masterGain.gain.value = 0.00001;
-  ambientGain.gain.value = 0.00001;
-  baseOscillator.type = "sine";
-  baseOscillator.frequency.value = 58;
-  shimmerOscillator.type = "triangle";
-  shimmerOscillator.frequency.value = 116;
-  driftOscillator.type = "sine";
-  driftOscillator.frequency.value = 0.13;
-  driftGain.gain.value = 3.8;
-
-  driftOscillator.connect(driftGain);
-  driftGain.connect(baseOscillator.frequency);
-  baseOscillator.connect(ambientGain);
-  shimmerOscillator.connect(ambientGain);
-  ambientGain.connect(masterGain);
-  masterGain.connect(context.destination);
-
-  baseOscillator.start();
-  shimmerOscillator.start();
-  driftOscillator.start();
-
-  return {
-    context,
-    masterGain,
-    ambientGain,
-    baseOscillator,
-    shimmerOscillator,
-    driftOscillator,
-    driftGain,
-  };
-}
-
-function schedulePulse(
-  context: AudioContext,
-  masterGain: GainNode,
-  {
-    type,
-    frequency,
-    destination = frequency * 0.58,
-    duration,
-    volume,
-  }: {
-    type: OscillatorType;
-    frequency: number;
-    destination?: number;
-    duration: number;
-    volume: number;
-  },
-) {
-  const oscillator = context.createOscillator();
-  const gain = context.createGain();
-  const now = context.currentTime;
-
-  oscillator.type = type;
-  oscillator.frequency.setValueAtTime(frequency, now);
-  oscillator.frequency.exponentialRampToValueAtTime(
-    Math.max(40, destination),
-    now + duration,
-  );
-  gain.gain.setValueAtTime(0.00001, now);
-  gain.gain.exponentialRampToValueAtTime(volume, now + duration * 0.18);
-  gain.gain.exponentialRampToValueAtTime(0.00001, now + duration);
-
-  oscillator.connect(gain);
-  gain.connect(masterGain);
-  oscillator.start(now);
-  oscillator.stop(now + duration + 0.02);
+function clampVolume(value: number) {
+  return Math.min(1, Math.max(0, value));
 }
 
 export function SoundToggle() {
   const { soundEnabled, setSoundEnabled } = useAppState();
-  const { transitionState } = useAppRouter();
-  const engineRef = useRef<AudioEngine | null>(null);
-  const lastHoverAtRef = useRef(0);
-  const lastInteractiveRef = useRef<HTMLElement | null>(null);
-  const lastPhaseRef = useRef(transitionState.phase);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fadeFrameRef = useRef<number | null>(null);
+  const [autoplayBlocked, setAutoplayBlocked] = useState(false);
 
-  const ensureEngine = useCallback(async () => {
-    if (typeof AudioContext === "undefined") {
-      return null;
+  const stopFade = useCallback(() => {
+    if (fadeFrameRef.current !== null) {
+      window.cancelAnimationFrame(fadeFrameRef.current);
+      fadeFrameRef.current = null;
     }
-
-    if (!engineRef.current) {
-      engineRef.current = createAudioEngine();
-    }
-
-    if (engineRef.current.context.state === "suspended") {
-      await engineRef.current.context.resume();
-    }
-
-    return engineRef.current;
   }, []);
 
-  const playHoverPulse = useCallback(async () => {
-    const now = performance.now();
+  const fadeVolume = useCallback(
+    (
+      audio: HTMLAudioElement,
+      targetVolume: number,
+      { duration, pauseOnEnd = false }: FadeOptions,
+    ) => {
+      stopFade();
 
-    if (now - lastHoverAtRef.current < 110) {
-      return;
-    }
+      const safeTarget = clampVolume(targetVolume);
+      const startingVolume = audio.volume;
 
-    lastHoverAtRef.current = now;
-    const engine = await ensureEngine();
+      if (Math.abs(startingVolume - safeTarget) < 0.01 || duration <= 0) {
+        audio.volume = safeTarget;
 
-    if (!engine || !soundEnabled) {
-      return;
-    }
+        if (pauseOnEnd && safeTarget === 0) {
+          audio.pause();
+        }
 
-    schedulePulse(engine.context, engine.masterGain, {
-      type: "triangle",
-      frequency: 640,
-      destination: 420,
-      duration: 0.09,
-      volume: 0.016,
-    });
-  }, [ensureEngine, soundEnabled]);
-
-  const playClickPulse = useCallback(async () => {
-    const engine = await ensureEngine();
-
-    if (!engine || !soundEnabled) {
-      return;
-    }
-
-    schedulePulse(engine.context, engine.masterGain, {
-      type: "sine",
-      frequency: 196,
-      destination: 92,
-      duration: 0.22,
-      volume: 0.028,
-    });
-
-    schedulePulse(engine.context, engine.masterGain, {
-      type: "triangle",
-      frequency: 784,
-      destination: 280,
-      duration: 0.12,
-      volume: 0.012,
-    });
-  }, [ensureEngine, soundEnabled]);
-
-  const playRoutePulse = useCallback(async () => {
-    const engine = await ensureEngine();
-
-    if (!engine || !soundEnabled) {
-      return;
-    }
-
-    schedulePulse(engine.context, engine.masterGain, {
-      type: "sawtooth",
-      frequency: 240,
-      destination: 74,
-      duration: 0.34,
-      volume: 0.02,
-    });
-  }, [ensureEngine, soundEnabled]);
-
-  useEffect(() => {
-    void (async () => {
-      const engine = await ensureEngine();
-
-      if (!engine) {
         return;
       }
 
-      const currentTime = engine.context.currentTime;
-      engine.masterGain.gain.cancelScheduledValues(currentTime);
-      engine.ambientGain.gain.cancelScheduledValues(currentTime);
-      engine.shimmerOscillator.frequency.setValueAtTime(
-        soundEnabled ? 116 : 92,
-        currentTime,
-      );
-      engine.masterGain.gain.linearRampToValueAtTime(
-        soundEnabled ? 0.9 : 0.00001,
-        currentTime + 0.35,
-      );
-      engine.ambientGain.gain.linearRampToValueAtTime(
-        soundEnabled ? 0.022 : 0.00001,
-        currentTime + 0.45,
-      );
-    })();
-  }, [ensureEngine, soundEnabled]);
+      const startAt = performance.now();
 
-  useEffect(() => {
-    const handlePointerOver = (event: Event) => {
-      const target = event.target;
+      const updateVolume = (frameAt: number) => {
+        const progress = Math.min((frameAt - startAt) / duration, 1);
+        audio.volume = clampVolume(
+          startingVolume + (safeTarget - startingVolume) * progress,
+        );
 
-      if (!(target instanceof Element)) {
-        return;
-      }
-
-      const interactive = target.closest(interactiveSelector);
-
-      if (!(interactive instanceof HTMLElement)) {
-        return;
-      }
-
-      if (interactive === lastInteractiveRef.current) {
-        return;
-      }
-
-      lastInteractiveRef.current = interactive;
-      void playHoverPulse();
-    };
-
-    const handlePointerMove = (event: Event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element)) {
-        return;
-      }
-
-      if (!target.closest(interactiveSelector)) {
-        lastInteractiveRef.current = null;
-      }
-    };
-
-    const handleFocusIn = (event: Event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element) || !target.closest(interactiveSelector)) {
-        return;
-      }
-
-      void playHoverPulse();
-    };
-
-    const handleClick = (event: Event) => {
-      const target = event.target;
-
-      if (!(target instanceof Element) || !target.closest(interactiveSelector)) {
-        return;
-      }
-
-      void playClickPulse();
-    };
-
-    document.addEventListener("pointerover", handlePointerOver, true);
-    document.addEventListener("pointermove", handlePointerMove, true);
-    document.addEventListener("focusin", handleFocusIn, true);
-    document.addEventListener("click", handleClick, true);
-
-    return () => {
-      document.removeEventListener("pointerover", handlePointerOver, true);
-      document.removeEventListener("pointermove", handlePointerMove, true);
-      document.removeEventListener("focusin", handleFocusIn, true);
-      document.removeEventListener("click", handleClick, true);
-    };
-  }, [playClickPulse, playHoverPulse]);
-
-  useEffect(() => {
-    if (
-      transitionState.active &&
-      transitionState.phase === "out" &&
-      lastPhaseRef.current !== "out"
-    ) {
-      void playRoutePulse();
-    }
-
-    lastPhaseRef.current = transitionState.phase;
-  }, [playRoutePulse, transitionState.active, transitionState.phase]);
-
-  useEffect(() => {
-    return () => {
-      if (!engineRef.current) {
-        return;
-      }
-
-      engineRef.current.baseOscillator.stop();
-      engineRef.current.shimmerOscillator.stop();
-      engineRef.current.driftOscillator.stop();
-      engineRef.current.ambientGain.disconnect();
-      engineRef.current.masterGain.disconnect();
-      void engineRef.current.context.close();
-    };
-  }, []);
-
-  return (
-    <button
-      className={`sound-toggle ${soundEnabled ? "is-enabled" : ""}`}
-      aria-pressed={soundEnabled}
-      onClick={async () => {
-        if (!soundEnabled) {
-          await ensureEngine();
-          setSoundEnabled(true);
+        if (progress < 1) {
+          fadeFrameRef.current = window.requestAnimationFrame(updateVolume);
           return;
         }
 
-        setSoundEnabled(false);
+        fadeFrameRef.current = null;
+
+        if (pauseOnEnd && safeTarget === 0) {
+          audio.pause();
+        }
+      };
+
+      fadeFrameRef.current = window.requestAnimationFrame(updateVolume);
+    },
+    [stopFade],
+  );
+
+  const ensureAudio = useCallback(() => {
+    if (!audioRef.current) {
+      const audio = new Audio(AUDIO_SOURCE);
+      audio.loop = true;
+      audio.preload = "auto";
+      audio.autoplay = true;
+      audio.volume = 0;
+      audioRef.current = audio;
+    }
+
+    return audioRef.current;
+  }, []);
+
+  const startPlayback = useCallback(async () => {
+    const audio = ensureAudio();
+    const needsFadeIn = audio.paused;
+
+    stopFade();
+
+    if (needsFadeIn) {
+      audio.volume = 0;
+    }
+
+    try {
+      await audio.play();
+      setAutoplayBlocked(false);
+      fadeVolume(audio, TARGET_VOLUME, {
+        duration: needsFadeIn ? FADE_IN_MS : 160,
+      });
+      return true;
+    } catch {
+      setAutoplayBlocked(true);
+      return false;
+    }
+  }, [ensureAudio, fadeVolume, stopFade]);
+
+  const stopPlayback = useCallback(() => {
+    const audio = ensureAudio();
+    setAutoplayBlocked(false);
+
+    if (audio.paused) {
+      audio.volume = 0;
+      return;
+    }
+
+    fadeVolume(audio, 0, {
+      duration: FADE_OUT_MS,
+      pauseOnEnd: true,
+    });
+  }, [ensureAudio, fadeVolume]);
+
+  useEffect(() => {
+    ensureAudio();
+
+    return () => {
+      stopFade();
+      audioRef.current?.pause();
+      audioRef.current = null;
+    };
+  }, [ensureAudio, stopFade]);
+
+  useEffect(() => {
+    if (soundEnabled) {
+      void startPlayback();
+      return;
+    }
+
+    stopPlayback();
+  }, [soundEnabled, startPlayback, stopPlayback]);
+
+  useEffect(() => {
+    if (!soundEnabled || !autoplayBlocked) {
+      return;
+    }
+
+    const handleUserActivation = () => {
+      void startPlayback();
+    };
+
+    window.addEventListener("pointerdown", handleUserActivation, true);
+    window.addEventListener("keydown", handleUserActivation, true);
+
+    return () => {
+      window.removeEventListener("pointerdown", handleUserActivation, true);
+      window.removeEventListener("keydown", handleUserActivation, true);
+    };
+  }, [autoplayBlocked, soundEnabled, startPlayback]);
+
+  const title = autoplayBlocked
+    ? "浏览器阻止了自动播放，点击恢复背景音乐"
+    : soundEnabled
+      ? "点击关闭背景音乐"
+      : "点击开启背景音乐";
+
+  return (
+    <button
+      type="button"
+      className={`sound-toggle ${soundEnabled ? "is-enabled" : ""}`}
+      aria-pressed={soundEnabled}
+      title={title}
+      onClick={() => {
+        if (soundEnabled) {
+          setSoundEnabled(false);
+          stopPlayback();
+          return;
+        }
+
+        setSoundEnabled(true);
+        void startPlayback();
       }}
     >
-      {soundEnabled ? "声音已开" : "声音已关"}
+      {soundEnabled ? "BGM 已开" : "BGM 已关"}
     </button>
   );
 }

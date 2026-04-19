@@ -38,16 +38,16 @@ const orbitGuide = [
 ];
 
 const skillLayoutMap = {
-  "skill-core-frontend": { x: "60%", y: "49%", width: "14.4rem" },
-  "skill-core-systems": { x: "33%", y: "54%", width: "11.4rem" },
-  "skill-domain-product": { x: "24%", y: "18%", width: "11rem" },
-  "skill-domain-visual": { x: "44%", y: "84%", width: "10rem" },
-  "skill-domain-performance": { x: "50%", y: "14%", width: "10.3rem" },
-  "skill-tool-react": { x: "83%", y: "49%", width: "13.4rem" },
-  "skill-tool-three": { x: "72%", y: "84%", width: "9.8rem" },
-  "skill-tool-gsap": { x: "18%", y: "74%", width: "9.6rem" },
-  "skill-tool-typescript": { x: "12.5%", y: "31%", width: "11.8rem" },
-  "skill-tool-node": { x: "73%", y: "17%", width: "12.2rem" },
+  "skill-core-frontend": { x: "58%", y: "52%", width: "13.6rem" },
+  "skill-core-systems": { x: "35%", y: "50%", width: "11rem" },
+  "skill-domain-product": { x: "24%", y: "24%", width: "10.6rem" },
+  "skill-domain-visual": { x: "46%", y: "78%", width: "9.7rem" },
+  "skill-domain-performance": { x: "50%", y: "18%", width: "10rem" },
+  "skill-tool-react": { x: "77%", y: "52%", width: "12.6rem" },
+  "skill-tool-three": { x: "68%", y: "78%", width: "9.4rem" },
+  "skill-tool-gsap": { x: "23%", y: "70%", width: "9.2rem" },
+  "skill-tool-typescript": { x: "18%", y: "34%", width: "11rem" },
+  "skill-tool-node": { x: "69%", y: "25%", width: "11.4rem" },
 } as const;
 
 function toPercentNumber(value: string) {
@@ -162,15 +162,6 @@ export function SkillsSection() {
           </div>
           <div className="skills-command-detail">
             <p>{focusedEntry.details}</p>
-            <div className="tag-list">
-              {focusedEntry.projectRefs.map((projectRef) => (
-                <span key={projectRef} className="tag">
-                  {siteContent.projects.entries.find(
-                    (project) => project.id === projectRef,
-                  )?.title ?? projectRef}
-                </span>
-              ))}
-            </div>
             <span className="skills-command-note">
               悬停节点会暂停旋转并显示关系连线，拖动背景可以旋转整个轨道系统。
             </span>
@@ -257,10 +248,6 @@ export function SkillsSection() {
               aria-hidden="true"
             />
             <div className="skills-orbit-lane orbit-lane-core" aria-hidden="true" />
-            <div className="skills-core-hub" aria-hidden="true">
-              <span>能力核心</span>
-              <strong>算法 × 结构 × 表达</strong>
-            </div>
             <div className="skills-node-cluster">
               {siteContent.skills.nodes.map((item) => {
                 const layout = skillLayoutMap[item.id as keyof typeof skillLayoutMap];
@@ -296,6 +283,12 @@ export function SkillsSection() {
                   </button>
                 );
               })}
+            </div>
+          </div>
+          <div className="skills-center-layer" aria-hidden="true">
+            <div className="skills-core-hub">
+              <span>能力核心</span>
+              <strong>算法 × 结构 × 表达</strong>
             </div>
           </div>
 

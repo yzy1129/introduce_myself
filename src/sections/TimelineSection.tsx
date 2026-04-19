@@ -20,6 +20,8 @@ export function TimelineSection() {
       value: "从单点执行走向系统整合",
     },
   ];
+  const timelinePathDefinition =
+    "M 40 214 C 150 146, 262 132, 370 172 S 566 244, 690 154 S 876 38, 960 106";
 
   useEffect(() => {
     const context = gsap.context(() => {
@@ -101,14 +103,27 @@ export function TimelineSection() {
           aria-hidden="true"
         >
           <path
+            className="timeline-path-aura"
+            d={timelinePathDefinition}
+          />
+          <path
             className="timeline-path-line"
-            d="M 40 190 C 150 120, 260 120, 360 170 S 570 240, 680 140 S 870 50, 960 120"
+            d={timelinePathDefinition}
           />
         </svg>
+        <div className="timeline-beacon timeline-beacon-alpha" />
+        <div className="timeline-beacon timeline-beacon-beta" />
 
         <div className="timeline-nodes">
           {siteContent.timeline.entries.map((entry, index) => (
-            <article key={entry.id} className="timeline-node">
+            <article
+              key={entry.id}
+              className={`timeline-node timeline-node-${index + 1} ${
+                index === siteContent.timeline.entries.length - 1
+                  ? "is-current"
+                  : ""
+              }`.trim()}
+            >
               <span className="timeline-node-index">
                 {String(index + 1).padStart(2, "0")}
               </span>
