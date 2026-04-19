@@ -145,7 +145,12 @@ export const siteContent: SiteContent = {
           "把结构、动效、信息层级和交互反馈组织成有叙事感的前端体验。",
         details:
           "我不把前端只看成界面拼装，而是把它当成技术结果对外表达的第一现场，负责把复杂系统讲清楚。",
-        projectRefs: ["project-digital-universe", "project-voice-assistant"],
+        projectRefs: [
+          "project-digital-universe",
+          "project-voice-assistant",
+          "project-developer-cheatsheet",
+          "project-pet-hospital-website",
+        ],
       },
       {
         id: "skill-core-systems",
@@ -159,6 +164,8 @@ export const siteContent: SiteContent = {
           "project-remote-sensing-detection",
           "project-voice-assistant",
           "project-digital-universe",
+          "project-developer-cheatsheet",
+          "project-pet-hospital-website",
         ],
       },
       {
@@ -182,7 +189,12 @@ export const siteContent: SiteContent = {
           "用空间层级、动效节奏和视觉引导帮助用户理解信息结构。",
         details:
           "我会让动效服务于理解，而不是只做装饰，让浏览者在探索过程中自然建立认知。",
-        projectRefs: ["project-digital-universe", "project-voice-assistant"],
+        projectRefs: [
+          "project-digital-universe",
+          "project-voice-assistant",
+          "project-developer-cheatsheet",
+          "project-pet-hospital-website",
+        ],
       },
       {
         id: "skill-domain-performance",
@@ -201,7 +213,12 @@ export const siteContent: SiteContent = {
         summary: "构建组件化、可维护、可持续演进的前端界面系统。",
         details:
           "我会用组件、状态和样式系统把复杂页面拆成稳定结构，让界面不只是能做出来，也能继续扩展。",
-        projectRefs: ["project-digital-universe", "project-voice-assistant"],
+        projectRefs: [
+          "project-digital-universe",
+          "project-voice-assistant",
+          "project-developer-cheatsheet",
+          "project-pet-hospital-website",
+        ],
       },
       {
         id: "skill-tool-three",
@@ -210,7 +227,7 @@ export const siteContent: SiteContent = {
         summary: "用三维场景建立空间感、沉浸感和更强的视觉记忆点。",
         details:
           "当二维页面不足以表达层次和氛围时，我会引入 3D 场景与运动语言来强化叙事。",
-        projectRefs: ["project-digital-universe"],
+        projectRefs: ["project-digital-universe", "project-developer-cheatsheet"],
       },
       {
         id: "skill-tool-gsap",
@@ -232,6 +249,8 @@ export const siteContent: SiteContent = {
           "project-remote-sensing-detection",
           "project-voice-assistant",
           "project-digital-universe",
+          "project-developer-cheatsheet",
+          "project-pet-hospital-website",
         ],
       },
       {
@@ -282,6 +301,28 @@ export const siteContent: SiteContent = {
             href: "https://gitee.com/yzyandhh/bysj_yzy",
           },
         ],
+        media: [
+          {
+            id: "remote-sensing-overview",
+            kind: "image",
+            title: "检测结果总览截图",
+            description:
+              "用一张总览图展示系统界面、目标框分布和结果阅读路径，方便快速说明项目的可视化输出。",
+            src: "project-media/remote-sensing-overview.svg",
+            alt: "遥感目标检测系统总览截图示意图",
+            ctaLabel: "查看截图",
+          },
+          {
+            id: "remote-sensing-architecture",
+            kind: "diagram",
+            title: "训练与验证流程架构图",
+            description:
+              "把数据处理、训练、验证和结果展示拆成一条清晰流程，便于答辩和项目沟通时快速解释系统结构。",
+            src: "project-media/remote-sensing-architecture.svg",
+            alt: "遥感目标检测系统架构图",
+            ctaLabel: "查看架构图",
+          },
+        ],
       },
       {
         id: "project-voice-assistant",
@@ -310,6 +351,110 @@ export const siteContent: SiteContent = {
           {
             label: "Gitee 仓库",
             href: "https://gitee.com/yzyandhh/yuyin-robot",
+          },
+        ],
+        media: [
+          {
+            id: "voice-assistant-screen",
+            kind: "image",
+            title: "语音助手交互截图",
+            description:
+              "展示命令输入、状态反馈和结果返回的界面关系，让交互闭环一眼可读。",
+            src: "project-media/voice-assistant-console.svg",
+            alt: "智能语音助手交互截图示意图",
+            ctaLabel: "查看截图",
+          },
+          {
+            id: "voice-assistant-architecture",
+            kind: "diagram",
+            title: "语音流程架构图",
+            description:
+              "把语音输入、识别、命令理解和反馈输出拆成层次清晰的结构图，便于继续扩展。",
+            src: "project-media/voice-assistant-architecture.svg",
+            alt: "智能语音助手架构图",
+            ctaLabel: "查看架构图",
+          },
+        ],
+      },
+      {
+        id: "project-developer-cheatsheet",
+        title: "开发者速查表",
+        summary:
+          "一个把常用开发命令、工具入口和高频知识整理成可快速检索页面的开发效率站点。",
+        problem:
+          "开发过程中经常需要反复查找命令、文档入口和常用片段，如果信息散落在多个网页和笔记里，就会不断打断工作流。",
+        solution:
+          "我把常见开发内容整理成统一的速查入口，用更轻量、更直接的页面结构降低信息跳转成本，让高频知识可以快速定位和复用。",
+        techStack: ["React", "TypeScript", "前端工程", "信息整理", "效率工具"],
+        impact:
+          "这个项目验证了我不仅能做展示型页面，也能把高频需求整理成真正有用的开发辅助工具。",
+        visual: "开发工具 / 效率站点",
+        highlights: [
+          "围绕真实开发高频需求组织信息结构",
+          "把速查、导航和使用效率放在同一优先级",
+          "适合作为长期维护和持续补充的工具型项目",
+        ],
+        outcomes: [
+          "完成面向开发场景的速查站点结构设计",
+          "整理出更适合快速定位的内容入口方式",
+          "形成可以继续扩展的效率工具雏形",
+        ],
+        links: [
+          {
+            label: "在线访问",
+            href: "https://aizcaid.cn/",
+          },
+        ],
+        media: [
+          {
+            id: "developer-cheatsheet-home",
+            kind: "image",
+            title: "速查首页截图",
+            description:
+              "展示速查表首页的导航方式和信息分区，让访问者能快速理解这个工具型项目的核心价值。",
+            src: "project-media/developer-cheatsheet-home.svg",
+            alt: "开发者速查表首页截图示意图",
+            ctaLabel: "查看截图",
+          },
+          {
+            id: "developer-cheatsheet-architecture",
+            kind: "diagram",
+            title: "内容组织架构图",
+            description:
+              "把页面导航、分类内容和检索路径拆成一张结构图，说明这个项目如何围绕效率需求组织页面。",
+            src: "project-media/developer-cheatsheet-architecture.svg",
+            alt: "开发者速查表架构图",
+            ctaLabel: "查看架构图",
+          },
+        ],
+      },
+      {
+        id: "project-pet-hospital-website",
+        title: "宠物医院网站前端框架",
+        summary:
+          "一个围绕宠物医院官网场景搭建的前端展示框架，用统一的页面结构承接品牌介绍、服务信息与站点导览。",
+        problem:
+          "宠物医院类网站通常要同时承载品牌形象、服务介绍、就诊信息和信任感表达，如果页面结构松散、信息入口不清晰，就很难形成专业稳定的第一印象。",
+        solution:
+          "我把首页展示、服务分区、信息卡片与导航关系整理成一套更适合行业官网场景的前端框架，让页面既能快速上线展示，也方便后续继续补充具体业务内容。",
+        techStack: ["前端框架", "响应式布局", "组件化页面", "官网展示", "信息分区"],
+        impact:
+          "这个项目补充了我在行业展示型网站方向的前端落地能力，说明我不仅能做个性化表达，也能围绕真实场景组织更稳健、可扩展的页面框架。",
+        visual: "宠物医疗 / 官网前端框架",
+        highlights: [
+          "围绕宠物医院场景组织首页、服务与品牌展示结构",
+          "适合作为后续补充预约、医生介绍和门店信息的前端底座",
+          "用更统一的页面框架承接医疗服务类网站的专业感表达",
+        ],
+        outcomes: [
+          "完成宠物医院主题网站的前端框架搭建",
+          "沉淀可继续扩展内容模块的展示页结构",
+          "提供可直接访问的线上演示入口",
+        ],
+        links: [
+          {
+            label: "在线访问",
+            href: "https://pet-hospital-website-eight.vercel.app",
           },
         ],
       },
@@ -346,6 +491,38 @@ export const siteContent: SiteContent = {
           {
             label: "在线访问",
             href: "https://love-heart-rouge.vercel.app",
+          },
+        ],
+        media: [
+          {
+            id: "digital-universe-atlas",
+            kind: "image",
+            title: "章节星图截图",
+            description:
+              "突出首页的章节星图入口和整体叙事结构，说明这个项目不是单页堆叠而是分章组织。",
+            src: "project-media/digital-universe-atlas.svg",
+            alt: "数字宇宙作品集章节星图截图",
+            ctaLabel: "查看截图",
+          },
+          {
+            id: "digital-universe-demo",
+            kind: "video",
+            title: "交互演示入口",
+            description:
+              "这里先预留录屏与视频位，当前可直接打开在线版本体验完整的路由、动效和章节切换。",
+            poster: "project-media/digital-universe-demo-poster.svg",
+            href: "https://love-heart-rouge.vercel.app",
+            ctaLabel: "打开在线演示",
+          },
+          {
+            id: "digital-universe-architecture",
+            kind: "diagram",
+            title: "前端系统架构图",
+            description:
+              "把内容模型、章节路由、3D 背景、全局状态和弹层系统拆成一张结构图，方便说明工程组织方式。",
+            src: "project-media/digital-universe-architecture.svg",
+            alt: "数字宇宙作品集架构图",
+            ctaLabel: "查看架构图",
           },
         ],
       },
@@ -417,6 +594,15 @@ export const siteContent: SiteContent = {
           "邮箱   : 3188721533@qq.com",
           "协作   : 支持远程沟通与项目交流",
           "状态   : 可继续交流研究与前端方向项目",
+          "动作   : 支持直接复制邮箱",
+        ],
+        actions: [
+          {
+            id: "contact-copy-email",
+            label: "复制邮箱",
+            value: "3188721533@qq.com",
+            copyValue: "3188721533@qq.com",
+          },
         ],
       },
       {
@@ -426,6 +612,21 @@ export const siteContent: SiteContent = {
           "Gitee  : https://gitee.com/yzyandhh",
           "GitHub : https://github.com/yzy1129",
           "方向   : 前端表达、交互系统、项目组织",
+          "动作   : 支持一键打开对应仓库主页",
+        ],
+        actions: [
+          {
+            id: "repo-gitee",
+            label: "打开 Gitee",
+            value: "gitee.com/yzyandhh",
+            href: "https://gitee.com/yzyandhh",
+          },
+          {
+            id: "repo-github",
+            label: "打开 GitHub",
+            value: "github.com/yzy1129",
+            href: "https://github.com/yzy1129",
+          },
         ],
       },
       {
@@ -436,8 +637,45 @@ export const siteContent: SiteContent = {
           "链接   : https://gitee.com/yzyandhh/bysj_yzy",
           "项目 2 : 智能语音助手",
           "链接   : https://gitee.com/yzyandhh/yuyin-robot",
-          "项目 3 : 心动告白",
+          "项目 3 : 开发者速查表",
+          "链接   : https://aizcaid.cn/",
+          "项目 4 : 宠物医院网站前端框架",
+          "链接   : https://pet-hospital-website-eight.vercel.app",
+          "项目 5 : 心动告白",
           "链接   : https://love-heart-rouge.vercel.app",
+          "动作   : 下方按钮可直接跳转到对应项目入口",
+        ],
+        actions: [
+          {
+            id: "project-open-remote-sensing",
+            label: "打开项目 1",
+            value: "bysj_yzy",
+            href: "https://gitee.com/yzyandhh/bysj_yzy",
+          },
+          {
+            id: "project-open-voice-assistant",
+            label: "打开项目 2",
+            value: "yuyin-robot",
+            href: "https://gitee.com/yzyandhh/yuyin-robot",
+          },
+          {
+            id: "project-open-developer-cheatsheet",
+            label: "打开项目 3",
+            value: "aizcaid.cn",
+            href: "https://aizcaid.cn/",
+          },
+          {
+            id: "project-open-pet-hospital-website",
+            label: "打开项目 4",
+            value: "pet-hospital-website-eight.vercel.app",
+            href: "https://pet-hospital-website-eight.vercel.app",
+          },
+          {
+            id: "project-open-digital-universe",
+            label: "打开项目 5",
+            value: "love-heart-rouge.vercel.app",
+            href: "https://love-heart-rouge.vercel.app",
+          },
         ],
       },
     ],

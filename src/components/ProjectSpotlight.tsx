@@ -108,6 +108,25 @@ export function ProjectSpotlight() {
               </div>
               <p>{project.impact}</p>
             </article>
+
+            {project.media?.length ? (
+              <article className="project-spotlight-card">
+                <span>证据素材</span>
+                <strong>{project.media.length} 组素材已接入详情模型</strong>
+                <div className="tag-list">
+                  {project.media.map((item) => (
+                    <span key={item.id} className="tag">
+                      {item.kind === "image"
+                        ? "截图"
+                        : item.kind === "video"
+                          ? "视频"
+                          : "架构图"}
+                    </span>
+                  ))}
+                </div>
+                <p>进入独立详情页可以查看完整的截图、视频入口和架构图展示。</p>
+              </article>
+            ) : null}
           </div>
         </div>
       </div>

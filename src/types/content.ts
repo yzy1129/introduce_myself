@@ -25,6 +25,20 @@ export type ProjectLink = {
   href: string;
 };
 
+export type ProjectMediaKind = "image" | "video" | "diagram";
+
+export type ProjectMedia = {
+  id: string;
+  kind: ProjectMediaKind;
+  title: string;
+  description: string;
+  src?: string;
+  poster?: string;
+  alt?: string;
+  href?: string;
+  ctaLabel?: string;
+};
+
 export type ProjectEntry = {
   id: string;
   title: string;
@@ -37,6 +51,16 @@ export type ProjectEntry = {
   highlights: string[];
   outcomes: string[];
   links: ProjectLink[];
+  media?: ProjectMedia[];
+};
+
+export type ContactCommandAction = {
+  id: string;
+  label: string;
+  value: string;
+  href?: string;
+  to?: string;
+  copyValue?: string;
 };
 
 export type TimelineEntry = {
@@ -51,6 +75,7 @@ export type ContactCommand = {
   command: string;
   description: string;
   response: string[];
+  actions?: ContactCommandAction[];
 };
 
 export type HeroChapter = {

@@ -1,5 +1,6 @@
 import { siteContent } from "@/content/siteContent";
 import { AppLink } from "@/components/AppLink";
+import { ProjectMediaGallery } from "@/components/ProjectMediaGallery";
 import { useAppRouter } from "@/app/AppRouter";
 import { useAppState } from "@/app/AppState";
 import type { ProjectEntry } from "@/types/content";
@@ -31,6 +32,10 @@ export function ProjectDetailPage({
     {
       label: "项目形态",
       value: project.visual,
+    },
+    {
+      label: "证据素材",
+      value: `${project.media?.length ?? 0} 组`,
     },
   ];
   const previousStop = previousProject
@@ -233,6 +238,19 @@ export function ProjectDetailPage({
             </div>
           </aside>
         </div>
+
+        {project.media?.length ? (
+          <div className="project-detail-media-block">
+            <div className="project-detail-media-head">
+              <span>证据素材</span>
+              <strong>截图、视频与架构图会在这里形成更完整的项目证据层。</strong>
+              <p>
+                这部分现在已经支持三类素材。你后续只需要替换数据源和本地文件，就能把真实截图、录屏和结构图接进来。
+              </p>
+            </div>
+            <ProjectMediaGallery items={project.media} />
+          </div>
+        ) : null}
       </section>
 
       <section className="chapter-crossroads story-section">

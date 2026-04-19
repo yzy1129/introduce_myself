@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#071019"/>
+  <rect x="72" y="72" width="1136" height="576" rx="32" fill="#0D1C2A" stroke="#1E3B51"/>
+  <circle cx="640" cy="360" r="182" fill="#123245"/>
+  <circle cx="640" cy="360" r="256" stroke="#8FE5FF" stroke-width="2"/>
+  <circle cx="640" cy="360" r="300" stroke="#FFD189" stroke-width="2" stroke-dasharray="12 16"/>
+  <path d="M606 298l112 62-112 62v-124z" fill="#F3F8FC"/>
+  <text x="72" y="102" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="32" font-weight="700">DIGITAL UNIVERSE DEMO SLOT</text>
+  <text x="396" y="598" fill="#A7C5D7" font-family="Arial, sans-serif" font-size="28">Replace this poster with a real recording or keep it as a live demo entry</text>
+</svg>

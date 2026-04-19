@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#08111B"/>
+  <text x="86" y="94" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="32" font-weight="700">VOICE ASSISTANT FLOW</text>
+  <circle cx="182" cy="352" r="78" fill="#112636" stroke="#8FE5FF" stroke-width="4"/>
+  <circle cx="428" cy="352" r="78" fill="#112636" stroke="#8FE5FF" stroke-width="4"/>
+  <circle cx="674" cy="352" r="78" fill="#112636" stroke="#FFD189" stroke-width="4"/>
+  <circle cx="920" cy="352" r="78" fill="#112636" stroke="#8FE5FF" stroke-width="4"/>
+  <circle cx="1098" cy="352" r="78" fill="#112636" stroke="#FFD189" stroke-width="4"/>
+  <path d="M264 352h84m162 0h84m162 0h84m162 0h20" stroke="#8FE5FF" stroke-width="8" stroke-linecap="round"/>
+  <text x="124" y="362" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Input</text>
+  <text x="358" y="362" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">ASR</text>
+  <text x="610" y="362" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Intent</text>
+  <text x="838" y="362" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Action</text>
+  <text x="1020" y="362" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Feedback</text>
+  <rect x="320" y="550" width="640" height="78" rx="18" fill="#102332" stroke="#1E3C52"/>
+  <text x="364" y="598" fill="#A5C1D2" font-family="Arial, sans-serif" font-size="26">Command understanding + UI response keep the loop readable</text>
+</svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#08111A"/>
+  <circle cx="640" cy="352" r="120" fill="#13384A"/>
+  <circle cx="640" cy="352" r="186" stroke="#8FE5FF" stroke-width="2"/>
+  <circle cx="640" cy="352" r="262" stroke="#FFD189" stroke-width="2" stroke-dasharray="10 14"/>
+  <circle cx="420" cy="232" r="72" fill="#102534" stroke="#8FE5FF"/>
+  <circle cx="904" cy="228" r="72" fill="#102534" stroke="#FFD189"/>
+  <circle cx="980" cy="468" r="72" fill="#102534" stroke="#8FE5FF"/>
+  <circle cx="302" cy="482" r="72" fill="#102534" stroke="#FFD189"/>
+  <circle cx="620" cy="138" r="62" fill="#102534" stroke="#8FE5FF"/>
+  <text x="566" y="358" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="34" font-weight="700">ATLAS</text>
+  <text x="378" y="240" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">ABOUT</text>
+  <text x="866" y="236" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">SKILLS</text>
+  <text x="946" y="476" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="22">PROJECTS</text>
+  <text x="268" y="490" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="24">TIMELINE</text>
+  <text x="578" y="146" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="22">CONTACT</text>
+  <text x="72" y="94" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="32" font-weight="700">DIGITAL UNIVERSE ATLAS</text>
+</svg>

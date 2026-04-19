@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#07101A"/>
+  <rect x="72" y="72" width="1136" height="576" rx="28" fill="#0E1C29" stroke="#1F3A50"/>
+  <rect x="112" y="132" width="1056" height="392" rx="18" fill="#0C1520"/>
+  <path d="M176 204h420" stroke="#8FE5FF" stroke-width="12" stroke-linecap="round"/>
+  <path d="M176 248h280" stroke="#8FE5FF" stroke-opacity=".6" stroke-width="12" stroke-linecap="round"/>
+  <path d="M176 312h508" stroke="#FFD189" stroke-width="12" stroke-linecap="round"/>
+  <path d="M176 356h362" stroke="#8FE5FF" stroke-opacity=".6" stroke-width="12" stroke-linecap="round"/>
+  <rect x="796" y="180" width="280" height="220" rx="22" fill="#112737" stroke="#8FE5FF"/>
+  <circle cx="936" cy="252" r="54" fill="#18374A"/>
+  <path d="M936 216v72" stroke="#F3F8FC" stroke-width="10" stroke-linecap="round"/>
+  <path d="M906 252h60" stroke="#F3F8FC" stroke-width="10" stroke-linecap="round"/>
+  <rect x="112" y="552" width="1056" height="52" rx="16" fill="#132435"/>
+  <text x="112" y="104" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="30" font-weight="700">VOICE ASSISTANT INTERACTION</text>
+  <text x="146" y="586" fill="#9CB9CA" font-family="Arial, sans-serif" font-size="24">&gt; voice input / intent / response / feedback loop</text>
+</svg>
