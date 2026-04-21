@@ -1,4 +1,5 @@
 import type { ProjectMedia } from "@/types/content";
+import { resolveAssetPath } from "@/utils/resolveAssetPath";
 
 type ProjectMediaGalleryProps = {
   items: ProjectMedia[];
@@ -15,11 +16,7 @@ function resolveMediaPath(path?: string) {
     return undefined;
   }
 
-  if (/^(https?:)?\/\//.test(path) || path.startsWith("data:")) {
-    return path;
-  }
-
-  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, "")}`;
+  return resolveAssetPath(path);
 }
 
 export function ProjectMediaGallery({ items }: ProjectMediaGalleryProps) {

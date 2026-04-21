@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useAppState } from "@/app/AppState";
-const AUDIO_SOURCE = `${import.meta.env.BASE_URL}audio/BGM.mp3`;
+import { resolveAssetPath } from "@/utils/resolveAssetPath";
+
+const AUDIO_SOURCE = resolveAssetPath("/audio/BGM.mp3");
 const TARGET_VOLUME = 0.42;
 const FADE_IN_MS = 520;
 const FADE_OUT_MS = 260;
