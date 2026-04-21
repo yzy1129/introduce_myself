@@ -6568,11 +6568,136 @@ body[data-route="timeline"] .timeline-node {
   .timeline-manifest {
     grid-template-columns: minmax(0, 1fr);
   }
+
+  body[data-route="about"] .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.6rem;
+  }
+
+  body[data-route="timeline"] .timeline-shell {
+    padding: 2rem 1.6rem;
+  }
+
+  body[data-route="timeline"] .timeline-nodes {
+    margin-top: 0.85rem;
+  }
+
+  body[data-route="timeline"] .timeline-node {
+    min-height: 16.8rem;
+    padding: 3.32rem 1.08rem 1.08rem;
+  }
 }
 
 @media (max-width: 768px) {
+  .app-hud {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.55rem;
+    padding: 0.8rem 0.75rem 0;
+  }
+
+  .hud-brand-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .hud-brand {
+    gap: 0.7rem;
+    min-width: 0;
+  }
+
+  .hud-copy {
+    gap: 0.08rem;
+  }
+
+  .hud-kicker,
+  .hud-brand p,
+  .hud-contact-chip-copy em {
+    display: none;
+  }
+
+  .hud-brand strong {
+    font-size: 0.96rem;
+    line-height: 1.18;
+  }
+
+  .hud-contact-chip {
+    justify-content: center;
+    padding-inline: 0.78rem;
+  }
+
+  .hud-contact-chip-copy strong {
+    font-size: 0.72rem;
+  }
+
+  .hud-nav {
+    width: 100%;
+    padding: 0.35rem;
+    gap: 0.35rem;
+    justify-content: flex-start;
+  }
+
+  .hud-nav-link {
+    flex: 0 0 auto;
+    min-width: max-content;
+  }
+
+  .sound-toggle {
+    position: fixed;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    z-index: 10;
+    padding: 0.72rem 0.82rem;
+    box-shadow:
+      0 16px 36px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  }
+
   .route-transition-copy strong {
     font-size: clamp(1.8rem, 8vw, 3rem);
+  }
+
+  .hero-section {
+    padding-top: 11.4rem;
+    padding-bottom: 3rem;
+  }
+
+  .route-hero {
+    padding: 11.8rem 0.9rem 2rem;
+  }
+
+  .story-section {
+    padding-inline: 0.9rem;
+  }
+
+  .section-shell,
+  body[data-route="about"] .section-about .section-shell,
+  body[data-route="skills"] .section-skills .section-shell,
+  body[data-route="timeline"] .section-timeline .section-shell {
+    gap: 1.1rem;
+  }
+
+  .section-intro {
+    gap: 0.85rem;
+    padding-left: 0.8rem;
+  }
+
+  .section-intro h2,
+  body[data-route="about"] .section-about .section-intro h2,
+  body[data-route="skills"] .section-skills .section-intro h2,
+  body[data-route="timeline"] .section-timeline .section-intro h2 {
+    font-size: clamp(2.15rem, 10vw, 3.2rem);
+  }
+
+  .section-intro p,
+  body[data-route="about"] .section-about .section-intro p,
+  body[data-route="skills"] .section-skills .section-intro p,
+  body[data-route="timeline"] .section-timeline .section-intro p {
+    max-width: none;
+    font-size: 0.95rem;
+    line-height: 1.72;
   }
 
   .route-hero-visual {
@@ -6583,8 +6708,32 @@ body[data-route="timeline"] .timeline-node {
     gap: 0.9rem;
   }
 
+  .route-hero-copy,
+  .route-hero-visual,
+  .chapter-crossroads-shell {
+    border-radius: 1.4rem;
+  }
+
+  .route-hero-copy,
+  .route-hero-visual,
+  .chapter-crossroads-shell,
+  .project-detail-card,
+  .project-detail-stack,
+  .project-detail-links,
+  .project-detail-media-head,
+  .project-media-copy,
+  .timeline-manifest,
+  .timeline-spotlight-copy,
+  .timeline-spotlight-outcome,
+  .skills-command-copy,
+  .skills-command-detail,
+  .terminal-shell,
+  .contact-command-list > div {
+    padding: 1rem;
+  }
+
   .route-hero-system {
-    width: min(100%, 23rem);
+    width: min(100%, 20rem);
     aspect-ratio: 1;
   }
 
@@ -6592,8 +6741,81 @@ body[data-route="timeline"] .timeline-node {
     padding: 0.85rem;
   }
 
+  .route-hero-stage-toggle-copy small {
+    display: none;
+  }
+
   .route-hero-ribbon {
     grid-template-columns: minmax(0, 1fr);
+    gap: 0.5rem;
+  }
+
+  .route-hero-ribbon span {
+    min-height: 0;
+    padding: 0.52rem 0.72rem;
+  }
+
+  .route-hero-actions,
+  .project-card-actions,
+  .project-spotlight-links,
+  .projects-aside-actions,
+  .modal-links {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .route-hero-core {
+    width: 7.8rem;
+    height: 7.8rem;
+    padding: 0.95rem;
+  }
+
+  .route-hero-core strong {
+    max-width: 5.4rem;
+    font-size: 1.02rem;
+  }
+
+  .route-hero-orbit-alpha {
+    width: 10.5rem;
+    height: 10.5rem;
+  }
+
+  .route-hero-orbit-beta {
+    width: 15rem;
+    height: 11.5rem;
+  }
+
+  .route-hero-node {
+    width: 5.9rem;
+    min-width: 5.9rem;
+    min-height: 3.7rem;
+    padding: 0.55rem 0.6rem;
+  }
+
+  .route-hero-node span {
+    font-size: 0.7rem;
+    line-height: 1.24;
+  }
+
+  .route-hero-node-1 {
+    left: calc(50% - 2.95rem);
+    top: 10%;
+  }
+
+  .route-hero-node-2 {
+    right: 0;
+    top: 64%;
+  }
+
+  .route-hero-node-3 {
+    left: 0;
+    top: 64%;
+  }
+
+  .route-hero-grid,
+  .route-hero-beam {
+    opacity: 0.32;
   }
 
   .route-hero-ledger,
@@ -6611,24 +6833,218 @@ body[data-route="timeline"] .timeline-node {
     padding: 0.9rem 0.95rem;
   }
 
-  .project-card-actions,
-  .project-spotlight-links {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
+  .chapter-route-button,
+  .chapter-route-home,
+  .chapter-route-link,
+  .projects-aside-link,
+  .project-card-head button,
+  .project-card-head a,
+  .modal-links a {
     width: 100%;
+    min-width: 0;
+    justify-content: center;
   }
 
   .about-visual,
   body[data-route="about"] .about-visual {
-    min-height: 36rem;
+    min-height: auto;
   }
 
   .timeline-manifest {
     padding: 1rem;
   }
+
+  .project-card-head,
+  .projects-board-header,
+  .timeline-shell-head,
+  .terminal-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .project-card-head h3 {
+    font-size: 1.4rem;
+  }
+
+  .project-card-head button,
+  .project-card-head a {
+    text-align: center;
+  }
+
+  .project-detail-shell,
+  .project-detail-media-block {
+    gap: 1rem;
+  }
+
+  .project-detail-card strong,
+  .project-detail-stack strong,
+  .project-detail-media-head strong,
+  .project-media-copy strong {
+    font-size: 1.18rem;
+  }
+
+  .project-media-frame,
+  .project-media-image,
+  .project-media-video,
+  .project-media-fallback {
+    min-height: 13rem;
+  }
+
+  .terminal-shell {
+    min-height: auto;
+  }
+
+  .terminal-header p {
+    margin: 0;
+  }
+
+  .terminal-history {
+    min-height: 16rem;
+    padding: 0.9rem;
+  }
+
+  .terminal-action-group {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-route="about"] .about-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.1rem;
+  }
+
+  body[data-route="about"] .about-visual {
+    padding: 1.05rem;
+  }
+
+  body[data-route="about"] .about-copy {
+    padding: 1.15rem;
+    gap: 1rem;
+  }
+
+  body[data-route="skills"] .skills-map {
+    min-height: auto;
+  }
+
+  body[data-route="skills"] .skills-core-hub {
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    border-radius: 1.5rem;
+    padding: 1rem;
+  }
+
+  body[data-route="timeline"] .timeline-shell {
+    padding: 1.15rem;
+  }
+
+  body[data-route="timeline"] .timeline-spotlight {
+    margin-bottom: 1rem;
+  }
+
+  body[data-route="timeline"] .timeline-nodes {
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  body[data-route="timeline"] .timeline-node {
+    min-height: auto;
+    padding: 3.08rem 1rem 1rem;
+  }
 }
 
 @media (max-width: 560px) {
+  .app-hud {
+    padding-inline: 0.6rem;
+  }
+
+  .hud-brand-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hud-contact-chip {
+    width: 100%;
+  }
+
+  .hud-nav-link span {
+    display: none;
+  }
+
+  .hero-section {
+    padding-top: 13rem;
+  }
+
+  .route-hero {
+    padding-top: 13.2rem;
+  }
+
+  .route-hero-copy h1 {
+    font-size: clamp(2rem, 11vw, 3rem);
+  }
+
+  .route-hero-visual {
+    min-height: 20rem;
+    padding: 0.85rem;
+  }
+
+  .route-hero-system {
+    width: min(100%, 18rem);
+  }
+
+  .route-hero-grid,
+  .route-hero-beam {
+    display: none;
+  }
+
+  .route-hero-core {
+    width: 6.6rem;
+    height: 6.6rem;
+  }
+
+  .route-hero-core::after {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .route-hero-core strong {
+    max-width: 4.4rem;
+    font-size: 0.92rem;
+  }
+
+  .route-hero-orbit-alpha {
+    width: 9rem;
+    height: 9rem;
+  }
+
+  .route-hero-orbit-beta {
+    width: 13rem;
+    height: 10rem;
+  }
+
+  .route-hero-node {
+    width: 5.2rem;
+    min-width: 5.2rem;
+    min-height: 3.3rem;
+  }
+
+  .route-hero-node span {
+    font-size: 0.64rem;
+  }
+
+  .terminal-history {
+    min-height: 14rem;
+  }
+
+  .project-media-frame,
+  .project-media-image,
+  .project-media-video,
+  .project-media-fallback {
+    min-height: 11rem;
+  }
+
+  body[data-route="skills"] .skills-node-cluster {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   .route-transition-door {
     width: 52%;
   }

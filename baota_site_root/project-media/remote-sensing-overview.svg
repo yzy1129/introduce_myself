@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#08111A"/>
+  <rect x="48" y="48" width="1184" height="624" rx="28" fill="#0F1D2A" stroke="#1E3B52"/>
+  <rect x="88" y="108" width="760" height="472" rx="20" fill="#102A39"/>
+  <rect x="884" y="108" width="308" height="224" rx="20" fill="#122535"/>
+  <rect x="884" y="356" width="308" height="224" rx="20" fill="#122535"/>
+  <rect x="160" y="180" width="126" height="92" rx="14" stroke="#8FE5FF" stroke-width="4"/>
+  <rect x="332" y="236" width="96" height="72" rx="14" stroke="#FFD189" stroke-width="4"/>
+  <rect x="484" y="156" width="182" height="128" rx="14" stroke="#8FE5FF" stroke-width="4"/>
+  <rect x="546" y="348" width="120" height="88" rx="14" stroke="#FFD189" stroke-width="4"/>
+  <circle cx="972" cy="182" r="42" fill="#183E52"/>
+  <circle cx="1068" cy="182" r="42" fill="#183E52"/>
+  <circle cx="1164" cy="182" r="42" fill="#183E52"/>
+  <path d="M920 452h220" stroke="#8FE5FF" stroke-width="10" stroke-linecap="round"/>
+  <path d="M920 496h180" stroke="#8FE5FF" stroke-opacity=".6" stroke-width="10" stroke-linecap="round"/>
+  <path d="M920 540h136" stroke="#FFD189" stroke-width="10" stroke-linecap="round"/>
+  <text x="88" y="90" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="30" font-weight="700">REMOTE SENSING OVERVIEW</text>
+  <text x="88" y="620" fill="#A9C6D8" font-family="Arial, sans-serif" font-size="24">Detection result board / target boxes / review path</text>
+</svg>

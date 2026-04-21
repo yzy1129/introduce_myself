@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" fill="none">
+  <rect width="1280" height="720" fill="#08111A"/>
+  <text x="84" y="94" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="32" font-weight="700">CHEATSHEET CONTENT MAP</text>
+  <rect x="102" y="162" width="248" height="120" rx="22" fill="#102331" stroke="#8FE5FF"/>
+  <rect x="408" y="162" width="248" height="120" rx="22" fill="#102331" stroke="#FFD189"/>
+  <rect x="714" y="162" width="248" height="120" rx="22" fill="#102331" stroke="#8FE5FF"/>
+  <rect x="1020" y="162" width="160" height="120" rx="22" fill="#102331" stroke="#FFD189"/>
+  <rect x="262" y="428" width="248" height="120" rx="22" fill="#102331" stroke="#8FE5FF"/>
+  <rect x="568" y="428" width="248" height="120" rx="22" fill="#102331" stroke="#FFD189"/>
+  <rect x="874" y="428" width="248" height="120" rx="22" fill="#102331" stroke="#8FE5FF"/>
+  <path d="M350 222h58m248 0h58m248 0h58" stroke="#8FE5FF" stroke-width="8" stroke-linecap="round"/>
+  <path d="M530 282v94m306-94v94m306-94v94" stroke="#FFD189" stroke-width="8" stroke-linecap="round"/>
+  <path d="M510 488h58m248 0h58" stroke="#8FE5FF" stroke-width="8" stroke-linecap="round"/>
+  <text x="146" y="232" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Navigation</text>
+  <text x="468" y="232" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Categories</text>
+  <text x="774" y="232" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Lookup</text>
+  <text x="1056" y="232" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Links</text>
+  <text x="336" y="498" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Content Blocks</text>
+  <text x="652" y="498" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Patterns</text>
+  <text x="966" y="498" fill="#F3F8FC" font-family="Arial, sans-serif" font-size="26">Reuse</text>
+</svg>

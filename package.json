@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && node scripts/build.mjs",
-    "build:vite": "tsc -b && vite build",
+    "build": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && node scripts/build.mjs",
+    "build:vite": "tsc -p tsconfig.app.json && tsc -p tsconfig.node.json && vite build",
+    "prepare:baota": "node scripts/prepare-baota-deploy.mjs",
     "preview": "node scripts/serve.mjs",
     "lint": "eslint .",
     "format": "prettier --write ."
