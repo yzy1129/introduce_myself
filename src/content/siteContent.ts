@@ -82,6 +82,22 @@ export const siteContent: SiteContent = {
         highlights: ["联系入口", "仓库信号", "下一步动作"],
       },
     ],
+    contactCard: {
+      triggerLabel: "微信名片",
+      triggerHint: "点击展开，扫码联系",
+      panelEyebrow: "即时联系",
+      panelTitle: "欢迎直接加我微信",
+      panelDescription:
+        "如果你对项目、实习机会或合作沟通感兴趣，可以直接扫码添加我，沟通会更快。",
+      name: "花花",
+      location: "湖南 湘潭",
+      imageSrc: "/contact/wechat-card.jpg",
+      imageAlt: "杨子煜的微信名片二维码",
+      tip: "建议使用微信扫一扫，或长按识别二维码添加好友。",
+      fallbackTitle: "微信联系入口已预留",
+      fallbackBody:
+        "名片原图接入后，这里会直接显示可扫码二维码；当前也可以先前往“建立连接”章节查看邮箱与仓库入口。",
+    },
     ctaLabel: "启动主航线",
     ctaHint: "按章节顺序深入浏览",
   },
@@ -402,7 +418,7 @@ export const siteContent: SiteContent = {
         links: [
           {
             label: "在线访问",
-            href: "https://aizcaid.cn/",
+            href: "https://dev-cheat-sheet-yzy.vercel.app/",
           },
         ],
         media: [
@@ -592,6 +608,7 @@ export const siteContent: SiteContent = {
         description: "显示联系方式",
         response: [
           "邮箱   : 3188721533@qq.com",
+          "微信   : 点击页头“微信名片”扫码联系",
           "协作   : 支持远程沟通与项目交流",
           "状态   : 可继续交流研究与前端方向项目",
           "动作   : 支持直接复制邮箱",
@@ -638,7 +655,7 @@ export const siteContent: SiteContent = {
           "项目 2 : 智能语音助手",
           "链接   : https://gitee.com/yzyandhh/yuyin-robot",
           "项目 3 : 开发者速查表",
-          "链接   : https://aizcaid.cn/",
+          "链接   : https://dev-cheat-sheet-yzy.vercel.app/",
           "项目 4 : 宠物医院网站前端框架",
           "链接   : https://pet-hospital-website-eight.vercel.app",
           "项目 5 : 心动告白",
@@ -661,8 +678,8 @@ export const siteContent: SiteContent = {
           {
             id: "project-open-developer-cheatsheet",
             label: "打开项目 3",
-            value: "aizcaid.cn",
-            href: "https://aizcaid.cn/",
+            value: "dev-cheat-sheet-yzy.vercel.app",
+            href: "https://dev-cheat-sheet-yzy.vercel.app/",
           },
           {
             id: "project-open-pet-hospital-website",

@@ -89,6 +89,21 @@ export type HeroChapter = {
   highlights: string[];
 };
 
+export type HeroContactCard = {
+  triggerLabel: string;
+  triggerHint: string;
+  panelEyebrow: string;
+  panelTitle: string;
+  panelDescription: string;
+  name: string;
+  location: string;
+  imageSrc?: string;
+  imageAlt: string;
+  tip: string;
+  fallbackTitle: string;
+  fallbackBody: string;
+};
+
 export type SiteContent = {
   preloader: {
     lines: string[];
@@ -100,6 +115,7 @@ export type SiteContent = {
     subtitle: string;
     intro: RevealContent;
     chapterAtlas: HeroChapter[];
+    contactCard: HeroContactCard;
     ctaLabel: string;
     ctaHint: string;
   };

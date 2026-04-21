@@ -5,8 +5,13 @@ const ENERGY_MOVE_DECAY = 8.5;
 const ENERGY_PULSE_DECAY = 9.5;
 
 export function EnergyField() {
-  const { isMobile, updatePointer, reducedMotion, selectedSkillId } =
-    useAppState();
+  const {
+    isMobile,
+    updatePointer,
+    reducedMotion,
+    selectedSkillId,
+    selectedProjectId,
+  } = useAppState();
   const fieldRef = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const targetRef = useRef({
@@ -27,7 +32,7 @@ export function EnergyField() {
   const lastFrameRef = useRef(0);
   const activeRef = useRef(false);
   const [active, setActive] = useState(false);
-  const overlayActive = Boolean(selectedSkillId);
+  const overlayActive = Boolean(selectedSkillId || selectedProjectId);
 
   useEffect(() => {
     const triggerPulse = () => {

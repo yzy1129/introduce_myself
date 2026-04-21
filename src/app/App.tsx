@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
@@ -24,29 +24,134 @@ function AppHeader() {
   const { chapters, route, getChapterPath, isActivePath } = useAppRouter();
   const hudGlyph =
     Array.from(siteContent.hero.title).at(-1) ?? siteContent.preloader.initials;
+  const { contactCard } = siteContent.hero;
+  const [wechatCardOpen, setWechatCardOpen] = useState(false);
+  const [wechatImageVisible, setWechatImageVisible] = useState(
+    Boolean(contactCard.imageSrc),
+  );
+  const brandShellRef = useRef<HTMLDivElement | null>(null);
+  const wechatCardId = useId();
+
+  useEffect(() => {
+    setWechatCardOpen(false);
+  }, [route.pathname]);
+
+  useEffect(() => {
+    setWechatImageVisible(Boolean(contactCard.imageSrc));
+  }, [contactCard.imageSrc]);
+
+  useEffect(() => {
+    if (!wechatCardOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: PointerEvent) => {
+      if (!brandShellRef.current?.contains(event.target as Node)) {
+        setWechatCardOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setWechatCardOpen(false);
+      }
+    };
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("pointerdown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [wechatCardOpen]);
 
   return (
     <header className="app-hud">
-      <AppLink
-        className={`hud-brand ${route.kind === "home" ? "is-active" : ""}`}
-        to="/"
-        aria-current={route.kind === "home" ? "page" : undefined}
-      >
-        <div className="hud-index-shell" aria-hidden="true">
-          <span className="hud-index-orbit hud-index-orbit-alpha" />
-          <span className="hud-index-orbit hud-index-orbit-beta" />
-          <span className="hud-index">{hudGlyph}</span>
+      <div className="hud-brand-shell" ref={brandShellRef}>
+        <AppLink
+          className={`hud-brand ${route.kind === "home" ? "is-active" : ""}`}
+          to="/"
+          aria-current={route.kind === "home" ? "page" : undefined}
+        >
+          <div className="hud-index-shell" aria-hidden="true">
+            <span className="hud-index-orbit hud-index-orbit-alpha" />
+            <span className="hud-index-orbit hud-index-orbit-beta" />
+            <span className="hud-index">{hudGlyph}</span>
+          </div>
+          <div className="hud-copy">
+            <span className="hud-kicker">个人品牌识别</span>
+            <strong>{siteContent.hero.eyebrow}</strong>
+            <p>沉浸式个人作品集系统</p>
+          </div>
+        </AppLink>
+
+        <button
+          type="button"
+          className={`hud-contact-chip ${wechatCardOpen ? "is-open" : ""}`}
+          aria-expanded={wechatCardOpen}
+          aria-controls={wechatCardId}
+          onClick={() => setWechatCardOpen((current) => !current)}
+        >
+          <span className="hud-contact-chip-dot" aria-hidden="true" />
+          <span className="hud-contact-chip-copy">
+            <strong>{contactCard.triggerLabel}</strong>
+            <em>{contactCard.triggerHint}</em>
+          </span>
+        </button>
+
+        <div
+          id={wechatCardId}
+          className={`hud-contact-card ${wechatCardOpen ? "is-open" : ""}`}
+          hidden={!wechatCardOpen}
+        >
+          <div className="hud-contact-card-head">
+            <span>{contactCard.panelEyebrow}</span>
+            <button
+              type="button"
+              className="hud-contact-card-close"
+              aria-label="关闭微信名片"
+              onClick={() => setWechatCardOpen(false)}
+            >
+              ×
+            </button>
+          </div>
+
+          <div className="hud-contact-card-copy">
+            <strong>{contactCard.panelTitle}</strong>
+            <p>{contactCard.panelDescription}</p>
+          </div>
+
+          <div className="hud-contact-card-identity">
+            <div className="hud-contact-card-avatar" aria-hidden="true">
+              微
+            </div>
+            <div className="hud-contact-card-identity-copy">
+              <strong>{contactCard.name}</strong>
+              <p>{contactCard.location}</p>
+            </div>
+          </div>
+
+          {wechatImageVisible && contactCard.imageSrc ? (
+            <div className="hud-contact-card-image-shell">
+              <img
+                className="hud-contact-card-image"
+                src={contactCard.imageSrc}
+                alt={contactCard.imageAlt}
+                loading="lazy"
+                onError={() => setWechatImageVisible(false)}
+              />
+            </div>
+          ) : (
+            <div className="hud-contact-card-fallback">
+              <strong>{contactCard.fallbackTitle}</strong>
+              <p>{contactCard.fallbackBody}</p>
+            </div>
+          )}
+
+          <p className="hud-contact-card-tip">{contactCard.tip}</p>
         </div>
-        <div className="hud-copy">
-          <span className="hud-kicker">个人品牌识别</span>
-          <strong>{siteContent.hero.eyebrow}</strong>
-          <p>沉浸式个人作品集系统</p>
-        </div>
-        <span className="hud-brand-signal">
-          <span className="hud-brand-signal-dot" aria-hidden="true" />
-          在线叙事
-        </span>
-      </AppLink>
+      </div>
 
       <nav className="hud-nav" aria-label="章节导航">
         {chapters.map((chapter) => (
