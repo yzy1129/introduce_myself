@@ -6,6 +6,7 @@ import { AppRouterProvider, useAppRouter } from "@/app/AppRouter";
 import { AppStateProvider, useAppState } from "@/app/AppState";
 import { AppLink } from "@/components/AppLink";
 import { ProjectSpotlight } from "@/components/ProjectSpotlight";
+import { RenderGuard } from "@/components/RenderGuard";
 import { RouteTransition } from "@/components/RouteTransition";
 import { SkillPanel } from "@/components/SkillPanel";
 import { SoundToggle } from "@/components/SoundToggle";
@@ -19,6 +20,26 @@ import { Preloader } from "@/sections/Preloader";
 import { EnergyField } from "@/systems/EnergyField";
 
 gsap.registerPlugin(ScrollTrigger);
+
+function AppFallback() {
+  return (
+    <main id="main-content" tabIndex={-1} className="app-main app-main-home">
+      <section id="hero" className="hero-section story-section">
+        <div className="hero-copy">
+          <span className="hero-eyebrow">{siteContent.hero.eyebrow}</span>
+          <div className="hero-stage">
+            <div className="hero-stage-panel">
+              <h1 className="hero-greeting hero-intro-heading">
+                {siteContent.hero.intro.base}
+              </h1>
+              <p className="hero-subtitle">{siteContent.hero.subtitle}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
 
 function AppHeader() {
   const { chapters, route, getChapterPath, isActivePath } = useAppRouter();
@@ -186,29 +207,37 @@ function AppViewport() {
   const [booted, setBooted] = useState(preloaderDismissed);
 
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: reducedMotion ? 0.9 : 1.2,
-      smoothWheel: true,
-      syncTouch: false,
-    });
-
-    lenis.on("scroll", ScrollTrigger.update);
-
+    let lenis: Lenis | null = null;
     let frameId = 0;
-    const raf = (time: number) => {
-      lenis.raf(time);
+
+    try {
+      lenis = new Lenis({
+        duration: reducedMotion ? 0.9 : 1.2,
+        smoothWheel: true,
+        syncTouch: false,
+      });
+
+      lenis.on("scroll", ScrollTrigger.update);
+
+      const raf = (time: number) => {
+        lenis?.raf(time);
+        frameId = window.requestAnimationFrame(raf);
+      };
+
       frameId = window.requestAnimationFrame(raf);
-    };
 
-    frameId = window.requestAnimationFrame(raf);
-
-    ScrollTrigger.defaults({
-      scroller: document.documentElement,
-    });
+      ScrollTrigger.defaults({
+        scroller: document.documentElement,
+      });
+    } catch (error) {
+      console.error("Lenis initialization failed. Falling back to native scroll.", error);
+    }
 
     return () => {
-      window.cancelAnimationFrame(frameId);
-      lenis.destroy();
+      if (frameId) {
+        window.cancelAnimationFrame(frameId);
+      }
+      lenis?.destroy();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, [reducedMotion]);
@@ -273,8 +302,12 @@ function AppViewport() {
       <a className="skip-link" href="#main-content">
         跳到主要内容
       </a>
-      <UniverseCanvas />
-      <EnergyField />
+      <RenderGuard>
+        <UniverseCanvas />
+      </RenderGuard>
+      <RenderGuard>
+        <EnergyField />
+      </RenderGuard>
       <AppHeader />
       <RouteTransition
         active={transitionState.active}
@@ -303,7 +336,9 @@ export function App() {
   return (
     <AppRouterProvider>
       <AppStateProvider>
-        <AppViewport />
+        <RenderGuard fallback={<AppFallback />}>
+          <AppViewport />
+        </RenderGuard>
       </AppStateProvider>
     </AppRouterProvider>
   );

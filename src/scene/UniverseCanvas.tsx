@@ -8,7 +8,7 @@ import {
   MathUtils,
   Mesh,
 } from "three";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useAppState } from "@/app/AppState";
 
 type StarLayerProps = {
@@ -295,8 +295,31 @@ function Atmosphere() {
   );
 }
 
+function detectWebGLSupport() {
+  if (typeof document === "undefined") {
+    return false;
+  }
+
+  try {
+    const canvas = document.createElement("canvas");
+
+    return Boolean(
+      canvas.getContext("webgl2") ||
+        canvas.getContext("webgl") ||
+        canvas.getContext("experimental-webgl"),
+    );
+  } catch {
+    return false;
+  }
+}
+
 export function UniverseCanvas() {
   const { performanceTier, reducedMotion } = useAppState();
+  const [webglSupported] = useState(detectWebGLSupport);
+
+  if (!webglSupported) {
+    return null;
+  }
 
   const counts =
     performanceTier === "high"

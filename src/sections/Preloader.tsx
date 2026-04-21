@@ -22,6 +22,18 @@ export function Preloader({ onComplete }: PreloaderProps) {
   const [visibleLines, setVisibleLines] = useState(0);
 
   useEffect(() => {
+    let completed = false;
+    let timeline: gsap.core.Timeline | null = null;
+
+    const complete = () => {
+      if (completed) {
+        return;
+      }
+
+      completed = true;
+      onComplete();
+    };
+
     const lineTimer = window.setInterval(() => {
       setVisibleLines((current) => {
         if (current >= siteContent.preloader.lines.length) {
@@ -33,20 +45,28 @@ export function Preloader({ onComplete }: PreloaderProps) {
       });
     }, 420);
 
-    const timeline = gsap.timeline({
-      defaults: { ease: "power3.out" },
-      onComplete,
-    });
+    const fallbackTimer = window.setTimeout(complete, 3600);
 
-    timeline
-      .fromTo(".preloader-overlay", { opacity: 1 }, { opacity: 1, duration: 0.4 })
-      .fromTo(".preloader-initials", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 }, 0.2)
-      .to(".preloader-burst", { scale: 1.15, opacity: 1, duration: 0.8 }, 1.9)
-      .to(".preloader-overlay", { opacity: 0, duration: 0.7, pointerEvents: "none" }, 2.6);
+    try {
+      timeline = gsap.timeline({
+        defaults: { ease: "power3.out" },
+        onComplete: complete,
+      });
+
+      timeline
+        .fromTo(".preloader-overlay", { opacity: 1 }, { opacity: 1, duration: 0.4 })
+        .fromTo(".preloader-initials", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 }, 0.2)
+        .to(".preloader-burst", { scale: 1.15, opacity: 1, duration: 0.8 }, 1.9)
+        .to(".preloader-overlay", { opacity: 0, duration: 0.7, pointerEvents: "none" }, 2.6);
+    } catch (error) {
+      console.error("Preloader animation failed.", error);
+      complete();
+    }
 
     return () => {
       window.clearInterval(lineTimer);
-      timeline.kill();
+      window.clearTimeout(fallbackTimer);
+      timeline?.kill();
     };
   }, [onComplete]);
 
